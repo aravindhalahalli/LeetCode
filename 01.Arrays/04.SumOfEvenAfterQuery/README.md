@@ -46,6 +46,27 @@ var sumEvenAfterQueries = function(a, queries) {
     return result;
 };
 ```
+##### Optimized solution
+```javascript
+var sumEvenAfterQueries = function(a, queries) {
+    let result = [];
+    let sum = a.reduce(((a,b)=>b%2==0?a+b:a),0);
+    for(item of queries){
+        let i = item[1];
+        let val = item[0];
+        a[i] += val;
+        if(a[i]%2 == 0){
+            sum += val%2==0?val:a[i];
+        } else {
+            sum -= val % 2 && a[i] - val;
+        }
+        result.push(sum);
+    }
+    return result;
+};
+```
+
+
 ```python
 class Solution:
     def sumEvenAfterQueries(self, A: 'List[int]', queries: 'List[List[int]]') -> 'List[int]':
